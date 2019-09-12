@@ -6,6 +6,8 @@ import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
 
+import java.util.Scanner;
+
 
 public class App implements ArduinoListener {
 
@@ -13,10 +15,14 @@ public class App implements ArduinoListener {
         Arduino arduino = new Arduino("COM5");
         arduino.addListener(this);
         if(arduino.connect()){
-            System.out.println("Conectado a arduino");
+            aplicationDo();          
         }else{
-            System.out.println("Sin conexión");
+            System.err.println("Sin conexión");
         }
+    }
+
+    private void aplicationDo() {
+
     }
 
     public static void main(String[] args){

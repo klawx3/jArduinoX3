@@ -4,6 +4,8 @@ import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +49,20 @@ public class Arduino implements SerialPortDataListener {
             return arduinoPort.openPort();
         }
         return false;
+    }
+
+    public void send(char character){
+        if(arduinoPort != null){
+            if(arduinoPort.isOpen()){
+                OutputStream outputStream = arduinoPort.getOutputStream();
+                try {
+                    outputStream.write(character);
+                    outputStream.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public void addListener(ArduinoListener listener){
